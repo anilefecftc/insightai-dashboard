@@ -1,0 +1,371 @@
+@import "tailwindcss";
+
+/* ─── Dark theme (default) ───────────────────────────────────────────────── */
+:root,
+[data-theme="dark"] {
+  --bg-primary:    #09090b;
+  --bg-card:       #111113;
+  --bg-card-hover: #1a1a1f;
+  --bg-elevated:   #1c1c22;
+
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.15);
+
+  --text-primary:   #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted:     #52525b;
+
+  --accent:       #2563eb;
+  --accent-light: #3b82f6;
+  --accent-glow:  rgba(37, 99, 235, 0.15);
+
+  --success:    #22c55e;
+  --success-bg: rgba(34, 197, 94, 0.10);
+  --danger:     #ef4444;
+  --danger-bg:  rgba(239, 68, 68, 0.10);
+  --warning:    #eab308;
+  --warning-bg: rgba(234, 179, 8, 0.10);
+
+  --chart-1: #2563eb;
+  --chart-2: #22c55e;
+  --chart-3: #eab308;
+  --chart-4: #ef4444;
+  --chart-5: #a855f7;
+
+  --sidebar-bg:       #09090b;
+  --sidebar-border:   rgba(255, 255, 255, 0.06);
+  /* nav active item: white text on dark sidebar */
+  --nav-active-color: #ffffff;
+}
+
+/* ─── Light theme ─────────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-primary:    #f8fafc;
+  --bg-card:       #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-elevated:   #f0f4f8;
+
+  --border-subtle:  rgba(0, 0, 0, 0.07);
+  --border-default: rgba(0, 0, 0, 0.14);
+  --border-strong:  rgba(0, 0, 0, 0.22);
+
+  /* Critical: strong text contrast */
+  --text-primary:   #0f172a;   /* near-black */
+  --text-secondary: #334155;   /* slate-700 */
+  --text-muted:     #64748b;   /* slate-500 — still readable */
+
+  --accent:       #2563eb;
+  --accent-light: #1d4ed8;     /* darker blue for light bg readability */
+  --accent-glow:  rgba(37, 99, 235, 0.08);
+
+  --success:    #15803d;       /* darker green */
+  --success-bg: rgba(21, 128, 61, 0.08);
+  --danger:     #b91c1c;       /* darker red */
+  --danger-bg:  rgba(185, 28, 28, 0.08);
+  --warning:    #92400e;       /* darker amber */
+  --warning-bg: rgba(146, 64, 14, 0.08);
+
+  --chart-1: #2563eb;
+  --chart-2: #15803d;
+  --chart-3: #92400e;
+  --chart-4: #b91c1c;
+  --chart-5: #7c3aed;
+
+  --sidebar-bg:       #ffffff;
+  --sidebar-border:   #e2e8f0;
+  /* nav active item: accent text on light sidebar */
+  --nav-active-color: var(--accent);
+}
+
+/* ─── Base ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { height: 100%; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ─── Card component ─────────────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 24px;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--border-default);
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Light mode cards use a box-shadow instead of glow */
+[data-theme="light"] .card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+}
+
+[data-theme="light"] .card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  pointer-events: none;
+}
+
+[data-theme="light"] .card-glow::before {
+  display: none;
+}
+
+/* ─── Inline code / markdown ─────────────────────────────────────────────── */
+.inline-code {
+  background: rgba(37,99,235,0.08);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  color: var(--accent-light);
+}
+
+.markdown-body p { margin: 0 0 0.75rem; }
+.markdown-body p:last-child { margin-bottom: 0; }
+.markdown-body ul {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.markdown-body li { margin-bottom: 0.35rem; }
+.markdown-body strong { color: var(--text-primary); font-weight: 600; }
+.markdown-body em { color: var(--text-secondary); }
+
+/* ─── Animations ─────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  50%       { box-shadow: 0 0 10px 3px rgba(239, 68, 68, 0.3); }
+}
+
+@keyframes draw-line {
+  from { stroke-dashoffset: 1000; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Funnel bar entrance animations */
+@keyframes stageReveal {
+  from { opacity: 0; transform: scaleY(0.15); }
+  to   { opacity: 1; transform: scaleY(1); }
+}
+
+/* Horizontal bar grow — for vertical funnel layout */
+@keyframes barGrow {
+  from { opacity: 0; width: 0 !important; min-width: 0 !important; }
+  to   { opacity: 1; }
+}
+
+@keyframes dropOffFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Auth page — card float animations (translateY only, ease-in-out) */
+@keyframes float1 {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-15px); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(10px); }
+}
+@keyframes float3 {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes float4 {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(12px); }
+}
+
+/* Blob circles — same float + very slow rotation */
+@keyframes blobDrift1 {
+  0%, 100% { transform: translateY(0)    rotate(0deg);   }
+  50%       { transform: translateY(-22px) rotate(180deg); }
+}
+@keyframes blobDrift2 {
+  0%, 100% { transform: translateY(0)   rotate(0deg);    }
+  50%       { transform: translateY(18px) rotate(-180deg); }
+}
+
+/* Spinner for login button */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Auth panel (old split-screen) — hidden on mobile */
+.auth-panel-desktop { display: flex; }
+@media (max-width: 768px) {
+  .auth-panel-desktop { display: none; }
+}
+
+/* Auth page — living gradient shift */
+@keyframes gradientShift {
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
+}
+
+/* Auth card background — white in light mode, var(--bg-card) in dark */
+:root,
+[data-theme="dark"]  { --auth-card-bg: #1a1a22; }
+[data-theme="light"] { --auth-card-bg: #ffffff; }
+
+/* Brand text — hide below 1060px */
+.auth-brand-side { display: flex !important; }
+@media (max-width: 1060px) {
+  .auth-brand-side { display: none !important; }
+}
+
+/* Right floating illustrations — hide below 1280px */
+.auth-floating-right { display: block !important; }
+@media (max-width: 1280px) {
+  .auth-floating-right { display: none !important; }
+}
+
+.animate-fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Stagger delays for grid children */
+.stagger-children > *:nth-child(1)  { animation-delay: 0.00s; }
+.stagger-children > *:nth-child(2)  { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(3)  { animation-delay: 0.10s; }
+.stagger-children > *:nth-child(4)  { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(5)  { animation-delay: 0.20s; }
+.stagger-children > *:nth-child(6)  { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(7)  { animation-delay: 0.30s; }
+.stagger-children > *:nth-child(8)  { animation-delay: 0.35s; }
+
+/* Button shimmer effect */
+.btn-shimmer {
+  background-size: 200% auto;
+  background-image: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    #3b82f6 40%,
+    var(--accent) 100%
+  );
+  transition: background-position 0.6s ease, transform 0.1s ease, opacity 0.2s;
+}
+.btn-shimmer:hover { background-position: right center; transform: scale(1.02); }
+.btn-shimmer:active { transform: scale(0.98); }
+
+/* Page transition */
+.page-enter { animation: fadeIn 0.15s ease forwards; }
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #52525b; }
+
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: #cbd5e1; }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ─── Skeleton loader ────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 25%,
+    var(--bg-card-hover) 50%,
+    var(--bg-card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ─── Date input dark theme styling ─────────────────────────────────────── */
+input[type="date"] {
+  color-scheme: dark;
+}
+[data-theme="light"] input[type="date"] {
+  color-scheme: light;
+}
+
+/* ─── Print styles (PDF export for AI Reports page) ─────────────────────── */
+@media print {
+  .no-print,
+  aside,
+  nav,
+  button,
+  .btn-shimmer {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #0f172a !important;
+    font-size: 12pt;
+  }
+
+  .card {
+    background: #fff !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  .print-header {
+    display: block !important;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18pt;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8pt;
+    padding-bottom: 8pt;
+    border-bottom: 2pt solid #e2e8f0;
+  }
+
+  main { margin: 0 !important; padding: 0 !important; }
+}
+
+.print-header { display: none; }
