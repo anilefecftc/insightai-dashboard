@@ -1,4 +1,5 @@
 # 🔍 InsightAI — AI-Powered SaaS Analytics Dashboard
+https://insightai-one.vercel.app
 
 ![Status](https://img.shields.io/badge/Status-Live-brightgreen) ![React](https://img.shields.io/badge/React-18-blue) ![FastAPI](https://img.shields.io/badge/FastAPI-Python-green) ![GPT](https://img.shields.io/badge/AI-GPT--4.1--mini-purple) ![License](https://img.shields.io/badge/License-MIT-yellow)
 
