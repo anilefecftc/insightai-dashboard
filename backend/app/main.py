@@ -15,6 +15,13 @@ load_dotenv()
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
+origins = [
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://*.vercel.app",
+    "*",
+]
+
 app = FastAPI(
     title="SaaS Analytics Dashboard API",
     description="KPI, Funnel, A/B Test, and AI Reporting endpoints",
@@ -23,7 +30,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_URL, "http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
